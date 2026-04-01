@@ -23,3 +23,7 @@ http://localhost:8000/health
 http://localhost:8000/missions
 http://localhost:8000/missions/1/telemetry
 http://localhost:8000/missions/1/detections
+
+For å kjøre testskriptet testdata.py kjør
+python3 testdata.py 1 & python3 testdata.py 2 & 
+Dette gjør det mulig å simulere testdata i både mission 1 og mission 2 samtidig

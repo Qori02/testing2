@@ -3,10 +3,11 @@
 import requests
 import time
 import random 
+import sys
 import math 
 
 api_url ="http://localhost:8000"
-mission_id =2
+mission_id = int(sys.argv[1]) if len(sys.argv) > 1 else int(input("Mission ID: "))
 
 def send(sensor_type: str, value: float, unit: str):
     response=requests.post(
