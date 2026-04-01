@@ -41,14 +41,10 @@ def post_telemetry(mission_id: int, body: TelemetryIn):
 
 
 @router.get("", response_model=list[TelemetryOut])
-def get_telemetry(
-    mission_id: int,
-    range_minutes: int = Query(default=60, description="Hent data fra de siste X minuttene"),
-):
-    """Henter telemetridata for et oppdrag fra InfluxDB."""
+def get_telemetry(mission_id: int):
     query = f"""
         from(bucket: "drone_telemetry")
-          |> range(start: -{range_minutes}m)
+          |> range(start: -365d)
           |> filter(fn: (r) => r._measurement == "sensor_data")
           |> filter(fn: (r) => r.mission_id == "{mission_id}")
     """
