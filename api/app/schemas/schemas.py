@@ -3,7 +3,7 @@ from typing import Any, Optional
 from datetime import datetime
 from decimal import Decimal
 from app.models.models import MissionStatus, SensorTypeEnum, EquipmentType, EquipmentStatus, LogLevel
-
+import uuid
 
 # ── Missions ────────────────────────────────────────────────────────────────
 
@@ -103,3 +103,28 @@ class SystemLogOut(BaseModel):
     level:     LogLevel
     message:   str
     timestamp: Optional[datetime]
+
+# ── Genomic experimental feature ─────────────────────────────────────────────
+
+class GenomicSampleCreation(BaseModel):
+    sample_id: str
+    fasta_data: str
+
+class GenomicSampleOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id:         uuid.UUID
+    mission_id: int
+    sample_id:  str
+    created_at: Optional[datetime]
+
+class GenomicResultOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id:             uuid.UUID
+    sample_id:      uuid.UUID
+    species_name:   Optional[str]
+    accession:      Optional[str]
+    identity_pct:   Optional[Decimal]
+    score:          Optional[Decimal]
+    ncbi_url:       Optional[str]
+    created_at:     Optional[datetime]
