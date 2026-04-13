@@ -27,13 +27,13 @@ def upload_image(mission_id: int, file: UploadFile = File(...), db: Session = De
         mission_id=mission_id,
         object_class="unknown",
         confidence=0.0,
-        image_path=file.filename
+        image_path=file_path
     )
  
     db.add(detection)
     db.commit()
  
-    return {"message": "Image uploaded", "filename": file.filename}
+    return {"message": "Image uploaded", "filename": file_path}
  
  
 @router.post("/video/{mission_id}")
